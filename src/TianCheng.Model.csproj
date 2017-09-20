@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.0.2.3</Version>
+    <Authors>KKLL</Authors>
+    <Company>TianCheng</Company>
+    <Description>实体对象基类，及其常用操作。</Description>
+    <AssemblyVersion>1.0.2.3</AssemblyVersion>
+    <FileVersion>1.0.2.3</FileVersion>
+    <PackageProjectUrl>https://github.com/chengkkll/TianCheng.Model</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp1.1\TianCheng.Model.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Auth\**" />
+    <Compile Remove="Common\**" />
+    <Compile Remove="DataImport\**" />
+    <Compile Remove="Tools\**" />
+    <EmbeddedResource Remove="Auth\**" />
+    <EmbeddedResource Remove="Common\**" />
+    <EmbeddedResource Remove="DataImport\**" />
+    <EmbeddedResource Remove="Tools\**" />
+    <None Remove="Auth\**" />
+    <None Remove="Common\**" />
+    <None Remove="DataImport\**" />
+    <None Remove="Tools\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Tools\AssemblyHelper.cs" />
+    <Compile Include="Tools\Json\JsonTools.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
+    <PackageReference Include="MongoDB.Bson" Version="2.4.4" />
+    <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+
+</Project>

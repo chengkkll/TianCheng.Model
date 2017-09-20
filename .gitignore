@@ -1,0 +1,6 @@
+.git
+.vs
+src/bin
+src/obj
+*.log
+*.user

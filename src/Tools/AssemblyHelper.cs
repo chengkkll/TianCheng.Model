@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -17,32 +18,55 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public List<Assembly> GetAssemblyList()
         {
-            //获取根目录            
-            string runPath = AppContext.BaseDirectory;
-            //获取可能是程序集的文件列表
-            string[] fileArray = System.IO.Directory.GetFiles(runPath, "*.dll", System.IO.SearchOption.AllDirectories);
-            //获取程序集名称
-            IEnumerable<string> fileList = fileArray.Select(e => System.IO.Path.GetFileNameWithoutExtension(e));
-
-            //获取有效的程序集 (程序集名称和文件名相同)            
             List<Assembly> assemblyList = new List<Assembly>();
-            foreach (string file in fileList)
+            ////1、获取运行目录下的所有程序集         本意想拷贝到服务器上一个库文件可以自动加载运行。现在考虑意义不太大。有时间细细调整
+            ////获取根目录            
+            //string runPath = AppContext.BaseDirectory;
+            ////获取可能是程序集的文件列表
+            //string[] fileArray = System.IO.Directory.GetFiles(runPath, "*.dll", System.IO.SearchOption.AllDirectories);
+            ////获取程序集名称
+            //IEnumerable<string> fileList = fileArray.Select(e => System.IO.Path.GetFileNameWithoutExtension(e));
+
+            ////获取有效的程序集 (程序集名称和文件名相同)            
+            //foreach (string file in fileList)
+            //{
+            //    AssemblyName an = new AssemblyName(file);
+            //    if (an != null)
+            //    {
+            //        try
+            //        {
+            //            Assembly assembly = Assembly.Load(an);
+            //            if (assembly != null)
+            //                assemblyList.Add(assembly);
+            //        }
+            //        catch
+            //        {
+            //            //程序集无法反射时跳过
+            //        }
+            //    }
+            //}
+
+            //2、获取引用的再NuGet下的程序集
+            foreach (CompilationLibrary library in DependencyContext.Default.CompileLibraries)
             {
-                AssemblyName an = new AssemblyName(file);
-                if (an != null)
+                if (!library.Name.Contains("TianCheng"))
                 {
-                    try
-                    {
-                        Assembly assembly = Assembly.Load(an);
-                        if (assembly != null)
-                            assemblyList.Add(assembly);
-                    }
-                    catch
-                    {
-                        //程序集无法反射时跳过
-                    }
+                    if (library.Serviceable) continue;
+                    if (library.Type == "package") continue;
+                }
+
+                try
+                {
+                    var assembly = Assembly.Load(new AssemblyName(library.Name));
+                    if (assembly != null)
+                        assemblyList.Add(assembly);
+                }
+                catch
+                {
+                    //程序集无法反射时跳过
                 }
             }
+
             //返回有效的程序集
             return assemblyList;
         }

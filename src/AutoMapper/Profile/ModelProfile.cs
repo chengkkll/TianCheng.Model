@@ -18,20 +18,18 @@ namespace TianCheng.Model
             Register();
         }
         /// <summary>
-        /// 
+        /// 注册需要自动AutoMapper的对象信息
         /// </summary>
         public void Register()
         {
+            //时间与字符串的处理
             CreateMap<string, DateTime>().ConvertUsing(new StringToDateTimeConverter());
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeToStringConverter());
-            CreateMap<string, MongoDB.Bson.ObjectId>().ConvertUsing(new StringToObjectIdConverter());
-            CreateMap<MongoDB.Bson.ObjectId, string>().ConvertUsing(new ObjectIdToStringConverter());
             CreateMap<string, DateTime?>().ConvertUsing(new StringToDateTimeNullConverter());
             CreateMap<DateTime?, string>().ConvertUsing(new DateTimeNullToStringConverter());
-
+            //MongoDB的ID 与字符串的处理
+            CreateMap<string, MongoDB.Bson.ObjectId>().ConvertUsing(new StringToObjectIdConverter());
+            CreateMap<MongoDB.Bson.ObjectId, string>().ConvertUsing(new ObjectIdToStringConverter());
         }
-
-
     }
-
 }

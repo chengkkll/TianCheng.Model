@@ -164,7 +164,4 @@ namespace TianCheng.Model
         }
         #endregion
     }
-
-
-
 }

@@ -71,7 +71,5 @@ namespace TianCheng.Model
         /// 申请禁用
         /// </summary>
         ApplyDisable = 8192
-
-
     }
 }

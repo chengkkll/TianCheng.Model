@@ -5,7 +5,6 @@ using System.Text;
 
 namespace TianCheng.Model
 {
-
     /// <summary>
     /// String -> DateTime?
     /// </summary>

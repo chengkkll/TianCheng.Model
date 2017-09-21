@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.2.3</Version>
+    <Version>1.0.2.4</Version>
     <Authors>KKLL</Authors>
     <Company>TianCheng</Company>
     <Description>实体对象基类，及其常用操作。</Description>
-    <AssemblyVersion>1.0.2.3</AssemblyVersion>
-    <FileVersion>1.0.2.3</FileVersion>
+    <AssemblyVersion>1.0.2.4</AssemblyVersion>
+    <FileVersion>1.0.2.4</FileVersion>
     <PackageProjectUrl>https://github.com/chengkkll/TianCheng.Model</PackageProjectUrl>
   </PropertyGroup>
 
@@ -43,6 +43,10 @@
     <PackageReference Include="MongoDB.Bson" Version="2.4.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.4.4" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BaseModel\SQL\" />
   </ItemGroup>
 
 </Project>

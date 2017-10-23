@@ -125,6 +125,7 @@ namespace TianCheng.Model
                 {
                     if (type.GetInterfaces().Where(i => i.Name == interfaceName).Count() > 0)
                     {
+                        //Todo : 如果构造函数需要参数，需要增加处理逻辑
                         object inst = assembly.CreateInstance(type.FullName);
                         yield return (I)inst;
                     }

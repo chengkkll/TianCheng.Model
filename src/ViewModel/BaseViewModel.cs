@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace TianCheng.Model
 {
@@ -23,5 +24,10 @@ namespace TianCheng.Model
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        ///// <summary>
+        ///// 显示的名称
+        ///// </summary>
+        //public string name { get; set; }
     }
 }

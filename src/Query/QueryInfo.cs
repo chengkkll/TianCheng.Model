@@ -16,6 +16,16 @@ namespace TianCheng.Model
         [JsonProperty("order")] 
         public string OrderBy { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private QuerySort _Sort = new QuerySort();
+        /// <summary>
+        /// 排序规则
+        /// </summary>
+        [JsonProperty("sort")]
+        public QuerySort Sort { get { return _Sort; } set { _Sort = value; } }
+
 
         private QueryPagination _Pagination = new QueryPagination();
         /// <summary>
@@ -24,4 +34,6 @@ namespace TianCheng.Model
         [JsonProperty("pagination")]
         public QueryPagination Pagination { get { return _Pagination; } set { _Pagination = value; } }
     }
+
+ 
 }

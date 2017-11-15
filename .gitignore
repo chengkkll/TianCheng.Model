@@ -2,5 +2,7 @@
 .vs
 src/bin
 src/obj
+samples/WebApi/bin
+samples/WebApi/obj
 *.log
 *.user

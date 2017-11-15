@@ -1,0 +1,6 @@
+﻿{
+  "ConfigDatabaseInfo": {
+    "ServerAddress": "mongodb://demo:demo@118.89.221.56:59181",
+    "Database": "demo123"
+  }
+}

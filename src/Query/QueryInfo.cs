@@ -13,6 +13,7 @@ namespace TianCheng.Model
         /// <summary>
         /// 排序条件
         /// </summary>
+        [Obsolete("过时的版本，新版中会删除")]
         [JsonProperty("order")] 
         public string OrderBy { get; set; }
 

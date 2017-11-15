@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace TianCheng.Model
 {
@@ -78,17 +79,25 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public IEnumerable<Type> GetTypeByInterfaceName(string interfaceName)
         {
+            IList<Type> result = new List<Type>();
             foreach (var assembly in GetAssemblyList())
             {
-
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (type.GetInterfaces().Where(i => i.ToString().Contains(interfaceName)).Count() > 0)
+                    try
                     {
-                        yield return type;
+                        if (type.GetInterfaces().Where(i => i.ToString().Contains(interfaceName)).Count() > 0)
+                        {
+                            result.Add(type);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        CommonLog.Logger.LogError(ex, $"根据接口名称获取对象类型时出错。程序集：{assembly.FullName}\r\n类型:{type.Name}");
                     }
                 }
             }
+            return result;
         }
 
         /// <summary>

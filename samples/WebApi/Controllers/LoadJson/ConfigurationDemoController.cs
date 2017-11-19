@@ -33,11 +33,11 @@ namespace WebApi.Controllers
 
             var node = _Configuration.GetSection("DatabaseInfo");
 
-            DatabaseInfo di = new DatabaseInfo();
-            di.Database = node["Database"];
-
-            di.ServerAddress = _Configuration.GetSection("DatabaseInfo:ServerAddress").Value;
-
+            DatabaseInfo di = new DatabaseInfo()
+            {
+                Database = node["Database"],
+                ServerAddress = _Configuration.GetSection("DatabaseInfo:ServerAddress").Value
+            };
             return di.ToJson();
         }
 
@@ -98,10 +98,11 @@ namespace WebApi.Controllers
             IConfiguration configuration = builder.Build();
 
             var node = configuration.GetSection("ConfigDatabaseInfo");
-            DatabaseInfo di = new DatabaseInfo();
-            di.Database = node["Database"];
-            di.ServerAddress = node["ServerAddress"];
-
+            DatabaseInfo di = new DatabaseInfo()
+            {
+                Database = node["Database"],
+                ServerAddress = node["ServerAddress"]
+            };
             return di.ToJson();
         }
 

@@ -58,7 +58,7 @@ namespace TianCheng.Model
                 case ApiExceptionType.BadRequest: { HttpStatus = HttpStatusCode.Forbidden; Code = 11000; break; }
                 case ApiExceptionType.Required: { HttpStatus = HttpStatusCode.Forbidden; Code = 11001; break; }
                 case ApiExceptionType.HasRepeat: { HttpStatus = HttpStatusCode.Forbidden; Code = 11002; break; }
-                case ApiExceptionType.EmptyData: { HttpStatus = HttpStatusCode.Forbidden; Code = 11061; break; }
+                case ApiExceptionType.EmptyData: { HttpStatus = HttpStatusCode.NotFound; Code = 11061; break; }
                 case ApiExceptionType.RemoveUsed: { HttpStatus = HttpStatusCode.Forbidden; Code = 11101; break; }
             }
         }

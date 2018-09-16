@@ -20,22 +20,14 @@ namespace TianCheng.Model
         public PagedResult(List<T> data, PagedResultPagination pagination)
         {
             Data = data;
-            Pagination = pagination;
+            Pagination = pagination ?? new PagedResultPagination();
         }
 
         /// <summary>
         /// 分页信息
         /// </summary>
-        private PagedResultPagination _Pagination = null;
-        /// <summary>
-        /// 分页信息
-        /// </summary>
         [JsonProperty("pagination")]
-        public PagedResultPagination Pagination
-        {
-            get { return _Pagination; }
-            set { _Pagination = value ?? new PagedResultPagination(); }
-        }
+        public PagedResultPagination Pagination { get; set; } = new PagedResultPagination();
 
         /// <summary>
         /// 本页数据

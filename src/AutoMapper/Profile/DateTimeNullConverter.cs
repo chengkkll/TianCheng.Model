@@ -23,8 +23,8 @@ namespace TianCheng.Model
             {
                 return null;
             }
-            DateTime dt;
-            if (DateTime.TryParse(source, out dt))
+
+            if (DateTime.TryParse(source, out DateTime dt))
             {
                 return dt;
             }

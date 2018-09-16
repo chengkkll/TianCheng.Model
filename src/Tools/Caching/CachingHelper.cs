@@ -58,8 +58,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         public virtual T GetCache<T>(string key)
         {
-            T val;
-            if (!CacheObject.TryGetValue(key, out val))
+            if (!CacheObject.TryGetValue(key, out T val))
             {
                 // 如果缓存值不存在
                 return OnCacheEmpty<T>();

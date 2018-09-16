@@ -61,7 +61,7 @@ namespace TianCheng.Model
         {
             string fileContent = System.IO.File.ReadAllText(System.IO.Path.Combine(DependentPath, DependentFile));
             T val = ReadFile(fileContent);
-            CacheObject.Set(CacheKey, val, OneDayOptions);
+            SetCache(CacheKey, val);
             return val;
         }
         #endregion

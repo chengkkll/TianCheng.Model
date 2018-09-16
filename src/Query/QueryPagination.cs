@@ -18,7 +18,7 @@ namespace TianCheng.Model
         /// <summary>
         /// 要获取数据的页号
         /// </summary>
-        [Range(1,int.MaxValue, ErrorMessage ="当前页号必须是正整数")]
+        [Range(1, int.MaxValue, ErrorMessage = "当前页号必须是正整数")]
         [JsonProperty("index")]
         public int Index { get; set; }
 
@@ -40,9 +40,11 @@ namespace TianCheng.Model
         {
             get
             {
-                QueryPagination pa = new QueryPagination();
-                pa.Index = 1;
-                pa.PageMaxRecords = DefaultPageMaxRecords;
+                QueryPagination pa = new QueryPagination
+                {
+                    Index = 1,
+                    PageMaxRecords = DefaultPageMaxRecords
+                };
                 return pa;
             }
         }
@@ -54,9 +56,11 @@ namespace TianCheng.Model
         {
             get
             {
-                QueryPagination pa = new QueryPagination();
-                pa.Index = 1;
-                pa.PageMaxRecords = 10000;
+                QueryPagination pa = new QueryPagination
+                {
+                    Index = 1,
+                    PageMaxRecords = 10000
+                };
                 return pa;
             }
         }

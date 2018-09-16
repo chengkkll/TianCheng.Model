@@ -43,24 +43,38 @@ namespace TianCheng.Model
         {
 
         }
+        /// <summary>
+        /// 自定义异常
+        /// </summary>
+        /// <param name="message">错误提示文本</param>
+        /// <param name="ex">截获的异常对象</param>
+        public ApiException(string message, Exception ex)
+            : base(message, ex)
+        {
+
+        }
 
         /// <summary>
         /// 自定义异常
         /// </summary>
         /// <param name="exceptionType">错误编码</param>
         /// <param name="message">返回的提示文本</param>
-        public ApiException(ApiExceptionType exceptionType, string message)
-            : base(message)
+        /// <param name="ex">传入的异常信息</param>
+        public ApiException(ApiExceptionType exceptionType, string message, Exception ex = null)
+            : base(message, ex)
         {
+            // 创建异常信息
             Type = exceptionType;
             switch (exceptionType)
             {
-                case ApiExceptionType.BadRequest: { HttpStatus = HttpStatusCode.Forbidden; Code = 11000; break; }
-                case ApiExceptionType.Required: { HttpStatus = HttpStatusCode.Forbidden; Code = 11001; break; }
-                case ApiExceptionType.HasRepeat: { HttpStatus = HttpStatusCode.Forbidden; Code = 11002; break; }
-                case ApiExceptionType.EmptyData: { HttpStatus = HttpStatusCode.NotFound; Code = 11061; break; }
-                case ApiExceptionType.RemoveUsed: { HttpStatus = HttpStatusCode.Forbidden; Code = 11101; break; }
+                case ApiExceptionType.BadRequest: { HttpStatus = HttpStatusCode.BadRequest; Code = 40001; break; }
+                case ApiExceptionType.Required: { HttpStatus = HttpStatusCode.BadRequest; Code = 40002; break; }
+                case ApiExceptionType.HasRepeat: { HttpStatus = HttpStatusCode.Forbidden; Code = 40330; break; }
+                case ApiExceptionType.RemoveUsed: { HttpStatus = HttpStatusCode.Forbidden; Code = 40331; break; }
+                case ApiExceptionType.EmptyData: { HttpStatus = HttpStatusCode.NotFound; Code = 404001; break; }
             }
+            // 记录异常信息
+            // NLog.Log.Warn(message, this);
         }
         #endregion
 
@@ -69,18 +83,20 @@ namespace TianCheng.Model
         /// 创建一个请求的参数错误异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
+        /// <param name="innerException">抛出的异常对象</param>
         /// <returns></returns>
-        static public ApiException BadRequest(string message = "")
+        static public ApiException BadRequest(string message = "", Exception innerException = null)
         {
-            return new ApiException(ApiExceptionType.BadRequest, message);
+            return new ApiException(ApiExceptionType.BadRequest, message, innerException);
         }
         /// <summary>
         /// 抛出请求参数错误异常信息
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
-        static public void ThrowBadRequest(string message = "")
+        /// <param name="innerException">抛出的异常对象</param>
+        static public void ThrowBadRequest(string message = "", Exception innerException = null)
         {
-            throw BadRequest(message);
+            throw BadRequest(message, innerException);
         }
         #endregion
 
@@ -89,18 +105,20 @@ namespace TianCheng.Model
         /// 创建一个无法获取数据的异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
+        /// <param name="innerException">抛出的异常对象</param>
         /// <returns></returns>
-        static public ApiException EmptyData(string message = "")
+        static public ApiException EmptyData(string message = "", Exception innerException = null)
         {
-            return new ApiException(ApiExceptionType.EmptyData, message);
+            return new ApiException(ApiExceptionType.EmptyData, message, innerException);
         }
         /// <summary>
         /// 抛出无法获取数据异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
-        static public void ThrowEmptyData(string message = "")
+        /// <param name="innerException">抛出的异常对象</param>
+        static public void ThrowEmptyData(string message = "", Exception innerException = null)
         {
-            throw EmptyData(message);
+            throw EmptyData(message, innerException);
         }
         #endregion
 
@@ -109,18 +127,20 @@ namespace TianCheng.Model
         /// 数据被引用，无法删除异常
         /// </summary>
         /// <param name="message"></param>
+        /// <param name="innerException">抛出的异常对象</param>
         /// <returns></returns>
-        static public ApiException RemoveUsed(string message = "")
+        static public ApiException RemoveUsed(string message = "", Exception innerException = null)
         {
-            return new ApiException(ApiExceptionType.RemoveUsed, message);
+            return new ApiException(ApiExceptionType.RemoveUsed, message, innerException);
         }
         /// <summary>
         /// 抛出数据被引用，无法删除异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
-        static public void ThrowRemoveUsed(string message = "")
+        /// <param name="innerException">抛出的异常对象</param>
+        static public void ThrowRemoveUsed(string message = "", Exception innerException = null)
         {
-            throw RemoveUsed(message);
+            throw RemoveUsed(message, innerException);
         }
         #endregion
 
@@ -129,18 +149,20 @@ namespace TianCheng.Model
         /// 必填项没有填写异常
         /// </summary>
         /// <param name="message"></param>
+        /// <param name="innerException">抛出的异常对象</param>
         /// <returns></returns>
-        static public ApiException Required(string message)
+        static public ApiException Required(string message, Exception innerException = null)
         {
-            return new ApiException(ApiExceptionType.Required, message);
+            return new ApiException(ApiExceptionType.Required, message, innerException);
         }
         /// <summary>
         /// 抛出必填项没有填写异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
-        static public void ThrowRequired(string message = "")
+        /// <param name="innerException">抛出的异常对象</param>
+        static public void ThrowRequired(string message = "", Exception innerException = null)
         {
-            throw Required(message);
+            throw Required(message, innerException);
         }
         #endregion
 
@@ -149,18 +171,20 @@ namespace TianCheng.Model
         /// 连接数据库错误异常
         /// </summary>
         /// <param name="message"></param>
+        /// <param name="innerException">抛出的异常对象</param>
         /// <returns></returns>
-        static public ApiException ConnectionDB(string message = "")
+        static public ApiException ConnectionDB(string message = "", Exception innerException = null)
         {
-            return new ApiException(ApiExceptionType.ConnectionDB, message);
+            return new ApiException(ApiExceptionType.ConnectionDB, message, innerException);
         }
         /// <summary>
         /// 抛出连接数据库错误异常
         /// </summary>
         /// <param name="message">异常错误文本信息</param>
-        static public void ThrowConnectionDB(string message = "")
+        /// <param name="innerException">抛出的异常对象</param>
+        static public void ThrowConnectionDB(string message = "", Exception innerException = null)
         {
-            throw ConnectionDB(message);
+            throw ConnectionDB(message, innerException);
         }
         #endregion
     }

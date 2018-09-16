@@ -12,23 +12,23 @@ namespace TianCheng.Model
     /// <summary>
     /// 业务数据对象
     /// </summary>
-    public class BusinessMongoModel : MongoIdModel
+    public class BusinessMongoModel : MongoIdModel, IBusinessModel<ObjectId>
     {
         #region 新增信息
         /// <summary>
         /// 创建人ID
         /// </summary>
-        [JsonProperty("creater_id")]
+        [JsonProperty("createrId")]
         public string CreaterId { get; set; }
         /// <summary>
         /// 创建人名称
         /// </summary>
-        [JsonProperty("creater_name")]
+        [JsonProperty("createrName")]
         public string CreaterName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        [JsonProperty("create_date")]
+        [JsonProperty("createDate")]
         public DateTime CreateDate { get; set; }
         #endregion
 
@@ -36,17 +36,17 @@ namespace TianCheng.Model
         /// <summary>
         /// 更新人ID
         /// </summary>
-        [JsonProperty("updater_id")] 
+        [JsonProperty("updaterId")]
         public string UpdaterId { get; set; }
         /// <summary>
         /// 更新人名称
         /// </summary>
-        [JsonProperty("updater_name")]
+        [JsonProperty("updaterName")]
         public string UpdaterName { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
-        [JsonProperty("update_date")]
+        [JsonProperty("updateDate")]
         public DateTime UpdateDate { get; set; }
         #endregion
 
@@ -58,12 +58,12 @@ namespace TianCheng.Model
         /// <summary>
         /// 发布时间
         /// </summary>
-        [JsonProperty("release_date")]
-        public DateTime ReleaseDate { get; set; }
+        [JsonProperty("releaseDate")]
+        public DateTime? ReleaseDate { get; set; }
         /// <summary>
         /// 是否逻辑删除
         /// </summary>
-        [JsonProperty("is_delete")]
+        [JsonProperty("isDelete")]
         public bool IsDelete { get; set; }
         #endregion
 

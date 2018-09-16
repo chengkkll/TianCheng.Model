@@ -31,8 +31,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public ObjectId ToObjectId(this string id)
         {
-            ObjectId _id = ObjectId.Empty;
-            if (ObjectId.TryParse(id, out _id))
+            if (ObjectId.TryParse(id, out ObjectId _id))
             {
                 return _id;
             }
@@ -45,9 +44,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public MongoIdModel ToMongoId(this string id)
         {
-            MongoIdModel model = new MongoIdModel();
-            model.Id = id.ToObjectId();
-            return model;
+            return new MongoIdModel() { Id = id.ToObjectId() };
         }
         /// <summary>
         /// 检查id是否为一个有效的MongoId
@@ -56,8 +53,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public bool CheckMongoId(string id)
         {
-            ObjectId _id = ObjectId.Empty;
-            return ObjectId.TryParse(id, out _id);
+            return ObjectId.TryParse(id, out ObjectId _id);
         }
     }
 }

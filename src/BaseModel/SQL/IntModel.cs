@@ -1,27 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 
 namespace TianCheng.Model
 {
     /// <summary>
-    /// Id为MongoId类型的实体基类
+    /// Id为int类型的实体基类
     /// </summary>
-    [BsonIgnoreExtraElements(Inherited = true)]
-    public class MongoIdModel : IIdModel<ObjectId>
+    public class IntModel : IIdModel<int>
     {
         /// <summary>
-        /// ID
+        /// Id
         /// </summary>
-        [BsonElement("_id")]
-        [JsonConverter(typeof(MongoObjectIdConverter))]
-        [JsonProperty("id")]
-        public ObjectId Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 获取ID的字符串格式
@@ -33,24 +24,24 @@ namespace TianCheng.Model
                 return Id.ToString();
             }
         }
-
         /// <summary>
-        /// 判断对象是否为空对象
+        /// 判断Id是否为空
         /// </summary>
+        /// <returns></returns>
         public bool IsEmpty
         {
             get
             {
-                return !_Check(Id);
+                return _Check(Id);
             }
         }
 
         /// <summary>
-        /// 检查当前对象ID是否正确
+        /// 检查指定ID是否正确
         /// </summary>
         /// <param name="id"></param>
         /// <returns>true正确ID   false不可用ID</returns>
-        public bool CheckId(ObjectId id)
+        public bool CheckId(int id)
         {
             return _Check(id);
         }
@@ -60,24 +51,26 @@ namespace TianCheng.Model
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool _Check(ObjectId id)
+        private bool _Check(int id)
         {
-            return !(id == null || String.IsNullOrEmpty(id.ToString()) || id.Timestamp == 0 || id.Machine == 0 || id.Increment == 0);
+            return id != 0;
         }
+
 
         ///// <summary>
         ///// 将字符串转成ID
         ///// </summary>
         ///// <param name="strId"></param>
         ///// <returns></returns>
-        //public ObjectId GetId(string strId)
+        //public int GetId(string strId)
         //{
-        //    if (ObjectId.TryParse(strId, out ObjectId id))
+        //    if(int.TryParse(strId,out int id))
         //    {
         //        return id;
         //    }
-        //    return ObjectId.Empty;
+        //    return 0;
         //}
+
         /// <summary>
         /// 设置对象ID，如果传入的ID无效，返回false
         /// </summary>
@@ -86,10 +79,10 @@ namespace TianCheng.Model
         public bool SetId(string strId)
         {
             // 检查ID是否有效
-            if (!ObjectId.TryParse(strId, out ObjectId id))
+            if (!int.TryParse(strId, out int id))
             {
                 return false;
-            }
+            }            
             if (!_Check(id))
             {
                 return false;
@@ -98,27 +91,5 @@ namespace TianCheng.Model
             this.Id = id;
             return true;
         }
-
-        ///// <summary>
-        ///// 检查指定ID是否正确
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns>true正确ID   false不可用ID</returns>
-        //public bool CheckId(ObjectId id)
-        //{
-        //    return !(id == null || String.IsNullOrWhiteSpace(id.ToString()) || id.Timestamp == 0 || id.Machine == 0 || id.Increment == 0);
-        //}
-
-
-
-
-
-        ///// <summary>
-        ///// 设置对象ID为空
-        ///// </summary>
-        //public void SetEmptyId()
-        //{
-        //    Id = MongoDB.Bson.ObjectId.Empty;
-        //}
     }
 }

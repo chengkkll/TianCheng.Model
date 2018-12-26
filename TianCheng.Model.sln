@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TianCheng.Model", "src\TianCheng.Model.csproj", "{BAFCFCE9-E0DD-42C6-B27B-ECF7587E5613}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "samples\WebApi\WebApi.csproj", "{28D4D2B4-A65A-43F5-87BE-8E387BE5C351}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BAFCFCE9-E0DD-42C6-B27B-ECF7587E5613}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAFCFCE9-E0DD-42C6-B27B-ECF7587E5613}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAFCFCE9-E0DD-42C6-B27B-ECF7587E5613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28D4D2B4-A65A-43F5-87BE-8E387BE5C351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28D4D2B4-A65A-43F5-87BE-8E387BE5C351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28D4D2B4-A65A-43F5-87BE-8E387BE5C351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28D4D2B4-A65A-43F5-87BE-8E387BE5C351}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

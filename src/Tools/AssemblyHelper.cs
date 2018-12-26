@@ -93,7 +93,7 @@ namespace TianCheng.Model
                     }
                     catch (Exception ex)
                     {
-                        CommonLog.Logger.LogError(ex, $"根据接口名称获取对象类型时出错。程序集：{assembly.FullName}\r\n类型:{type.Name}");
+                        CommonLog.Logger.Error(ex, $"根据接口名称获取对象类型时出错。程序集：{assembly.FullName}\r\n类型:{type.Name}");
                     }
                 }
             }

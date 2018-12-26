@@ -14,12 +14,14 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
+            // NLog.Web.NLogBuilder.ConfigureNLog("nlog.config");
             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                
                 .Build();
     }
 }

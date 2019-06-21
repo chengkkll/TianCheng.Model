@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 
 namespace TianCheng.Model
 {
     /// <summary>
     /// Api 异常处理
     /// </summary>
-    public class ApiException : System.Exception
+    public class ApiException : Exception
     {
         #region 异常属性
         /// <summary>
@@ -73,8 +71,6 @@ namespace TianCheng.Model
                 case ApiExceptionType.RemoveUsed: { HttpStatus = HttpStatusCode.Forbidden; Code = 40331; break; }
                 case ApiExceptionType.EmptyData: { HttpStatus = HttpStatusCode.NotFound; Code = 404001; break; }
             }
-            // 记录异常信息
-            // NLog.Log.Warn(message, this);
         }
         #endregion
 

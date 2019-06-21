@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TianCheng.Model
 {
@@ -35,5 +33,4 @@ namespace TianCheng.Model
         [JsonProperty("data")]
         public List<T> Data { get; set; }
     }
-
 }

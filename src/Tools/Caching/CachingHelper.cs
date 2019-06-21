@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Caching.Memory;
-using System.Threading;
-using System.IO;
+﻿using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace TianCheng.Model
 {
@@ -23,8 +19,7 @@ namespace TianCheng.Model
             {
                 if (_cache == null)
                 {
-                    MemoryCacheOptions options = new MemoryCacheOptions();
-                    _cache = new MemoryCache(options);
+                    _cache = new MemoryCache(new MemoryCacheOptions());
                 }
                 return _cache;
             }
@@ -46,10 +41,8 @@ namespace TianCheng.Model
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        protected virtual T OnCacheEmpty<T>()
-        {
-            return default(T);
-        }
+        protected virtual T OnCacheEmpty<T>() => default;
+
         /// <summary>
         /// 获取缓存信息
         /// </summary>
@@ -74,10 +67,7 @@ namespace TianCheng.Model
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
         /// <param name="val"></param>
-        public virtual void SetCache<T>(string key, T val)
-        {
-            CacheObject.Set(key, val, OneDayOptions);
-        }
-        #endregion        
+        public virtual void SetCache<T>(string key, T val) => CacheObject.Set(key, val, OneDayOptions);
+        #endregion
     }
 }

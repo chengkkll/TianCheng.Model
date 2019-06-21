@@ -1,14 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TianCheng.Model
 {
-
     /// <summary>
     /// 分页对象
     /// </summary>
@@ -40,12 +34,11 @@ namespace TianCheng.Model
         {
             get
             {
-                QueryPagination pa = new QueryPagination
+                return new QueryPagination
                 {
                     Index = 1,
                     PageMaxRecords = DefaultPageMaxRecords
                 };
-                return pa;
             }
         }
 
@@ -56,12 +49,11 @@ namespace TianCheng.Model
         {
             get
             {
-                QueryPagination pa = new QueryPagination
+                return new QueryPagination
                 {
                     Index = 1,
                     PageMaxRecords = 10000
                 };
-                return pa;
             }
         }
     }

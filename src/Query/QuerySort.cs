@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TianCheng.Model
 {
+    /// <summary>
+    /// 排序信息
+    /// </summary>
     public class QuerySort
     {
         /// <summary>

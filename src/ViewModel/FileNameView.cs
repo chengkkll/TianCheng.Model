@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TianCheng.Model
+﻿namespace TianCheng.Model
 {
     /// <summary>
     /// 文件名称信息查看对象

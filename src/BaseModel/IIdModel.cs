@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TianCheng.Model
+﻿namespace TianCheng.Model
 {
     /// <summary>
     /// ID实体基类接口
@@ -43,7 +39,5 @@ namespace TianCheng.Model
         /// <param name="strId"></param>
         /// <returns></returns>
         bool SetId(string strId);
-
-
     }
 }

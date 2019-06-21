@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TianCheng.Model
 {
@@ -22,6 +19,4 @@ namespace TianCheng.Model
         [JsonProperty("pagination")]
         public QueryPagination Pagination { get; set; } = new QueryPagination();
     }
-
- 
 }

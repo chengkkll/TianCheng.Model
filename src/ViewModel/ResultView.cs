@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace TianCheng.Model
 {
     /// <summary>
@@ -15,12 +9,10 @@ namespace TianCheng.Model
         /// <summary>
         /// 编码
         /// </summary>
-        [JsonProperty("code")]
         public int Code { get; set; }
         /// <summary>
         /// 返回消息
         /// </summary>
-        [JsonProperty("message")]
         public string Message { get; set; }
 
         #region 操作成功

@@ -1,61 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.2.0.0</Version>
-    <Authors>KKLL</Authors>
-    <Company>TianCheng</Company>
-    <Description>实体对象基类，及其常用操作。</Description>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
-    <PackageProjectUrl>https://github.com/chengkkll/TianCheng.Model</PackageProjectUrl>
-    <PackageReleaseNotes>支持core 2.1</PackageReleaseNotes>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.0</Version>
+    <Company>天成科技</Company>
+    <Product>天成科技通用类库</Product>
+    <Authors>成善斌</Authors>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp1.1\TianCheng.Model.xml</DocumentationFile>
-    <NoWarn>1701;1702;1705;1591</NoWarn>
+    <DocumentationFile>bin\Debug\netstandard2.0\TianCheng.Model.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\**" />
-    <Compile Remove="Common\**" />
-    <Compile Remove="DataImport\**" />
-    <Compile Remove="Tools\**" />
-    <EmbeddedResource Remove="Auth\**" />
-    <EmbeddedResource Remove="Common\**" />
-    <EmbeddedResource Remove="DataImport\**" />
-    <EmbeddedResource Remove="Tools\**" />
-    <None Remove="Auth\**" />
-    <None Remove="Common\**" />
-    <None Remove="DataImport\**" />
-    <None Remove="Tools\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Tools\AssemblyHelper.cs" />
-    <Compile Include="Tools\Caching\CachingFromFile.cs" />
-    <Compile Include="Tools\Caching\CachingHelper.cs" />
-    <Compile Include="Tools\IoC\AppConfig.cs" />
-    <Compile Include="Tools\IoC\ServiceLoader.cs" />
-    <Compile Include="Tools\Json\JsonTools.cs" />
-    <Compile Include="Tools\Log\CommonLog.cs" />
-    <Compile Include="Tools\Log\TcLog.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper" Version="8.1.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.1.0" />
-    <PackageReference Include="MongoDB.Bson" Version="2.7.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.7.0" />
-    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="Serilog.Sinks.Email" Version="2.3.0" />
+    <PackageReference Include="Serilog.Sinks.MongoDB" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
   </ItemGroup>
 
 </Project>

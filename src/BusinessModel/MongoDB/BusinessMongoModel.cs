@@ -1,11 +1,5 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TianCheng.Model
 {
@@ -18,17 +12,14 @@ namespace TianCheng.Model
         /// <summary>
         /// 创建人ID
         /// </summary>
-        [JsonProperty("createrId")]
         public string CreaterId { get; set; }
         /// <summary>
         /// 创建人名称
         /// </summary>
-        [JsonProperty("createrName")]
         public string CreaterName { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        [JsonProperty("createDate")]
         public DateTime CreateDate { get; set; }
         #endregion
 
@@ -36,17 +27,14 @@ namespace TianCheng.Model
         /// <summary>
         /// 更新人ID
         /// </summary>
-        [JsonProperty("updaterId")]
         public string UpdaterId { get; set; }
         /// <summary>
         /// 更新人名称
         /// </summary>
-        [JsonProperty("updaterName")]
         public string UpdaterName { get; set; }
         /// <summary>
         /// 更新时间
         /// </summary>
-        [JsonProperty("updateDate")]
         public DateTime UpdateDate { get; set; }
         #endregion
 
@@ -58,18 +46,11 @@ namespace TianCheng.Model
         /// <summary>
         /// 发布时间
         /// </summary>
-        [JsonProperty("releaseDate")]
         public DateTime? ReleaseDate { get; set; }
         /// <summary>
         /// 是否逻辑删除
         /// </summary>
-        [JsonProperty("isDelete")]
         public bool IsDelete { get; set; }
         #endregion
-
-
     }
-
-
-
 }

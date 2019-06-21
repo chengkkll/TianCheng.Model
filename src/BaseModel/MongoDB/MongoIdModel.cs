@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
@@ -30,7 +25,7 @@ namespace TianCheng.Model
         {
             get
             {
-                return Id.ToString();
+                return Check(Id) ? Id.ToString() : string.Empty;
             }
         }
 
@@ -41,8 +36,16 @@ namespace TianCheng.Model
         {
             get
             {
-                return !_Check(Id);
+                return !Check(Id);
             }
+        }
+
+        /// <summary>
+        /// 设置对象ID为空
+        /// </summary>
+        public void SetEmpty()
+        {
+            Id = ObjectId.Empty;
         }
 
         /// <summary>
@@ -52,7 +55,7 @@ namespace TianCheng.Model
         /// <returns>true正确ID   false不可用ID</returns>
         public bool CheckId(ObjectId id)
         {
-            return _Check(id);
+            return Check(id);
         }
 
         /// <summary>
@@ -60,9 +63,9 @@ namespace TianCheng.Model
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool _Check(ObjectId id)
+        private bool Check(ObjectId id)
         {
-            return !(id == null || String.IsNullOrEmpty(id.ToString()) || id.Timestamp == 0 || id.Machine == 0 || id.Increment == 0);
+            return !(id == null || id == ObjectId.Empty || string.IsNullOrEmpty(id.ToString()) || id.Timestamp == 0 || id.Machine == 0 || id.Increment == 0);
         }
 
         ///// <summary>
@@ -78,6 +81,7 @@ namespace TianCheng.Model
         //    }
         //    return ObjectId.Empty;
         //}
+
         /// <summary>
         /// 设置对象ID，如果传入的ID无效，返回false
         /// </summary>
@@ -90,7 +94,7 @@ namespace TianCheng.Model
             {
                 return false;
             }
-            if (!_Check(id))
+            if (!Check(id))
             {
                 return false;
             }
@@ -98,27 +102,5 @@ namespace TianCheng.Model
             this.Id = id;
             return true;
         }
-
-        ///// <summary>
-        ///// 检查指定ID是否正确
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns>true正确ID   false不可用ID</returns>
-        //public bool CheckId(ObjectId id)
-        //{
-        //    return !(id == null || String.IsNullOrWhiteSpace(id.ToString()) || id.Timestamp == 0 || id.Machine == 0 || id.Increment == 0);
-        //}
-
-
-
-
-
-        ///// <summary>
-        ///// 设置对象ID为空
-        ///// </summary>
-        //public void SetEmptyId()
-        //{
-        //    Id = MongoDB.Bson.ObjectId.Empty;
-        //}
     }
 }

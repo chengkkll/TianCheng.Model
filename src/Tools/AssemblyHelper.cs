@@ -1,10 +1,7 @@
-﻿using Microsoft.Extensions.DependencyModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using Microsoft.Extensions.Logging;
 
 namespace TianCheng.Model
 {
@@ -14,51 +11,27 @@ namespace TianCheng.Model
     public class AssemblyHelper
     {
         /// <summary>
-        /// 获取当前目录下有效的程序集 包含子目录
+        /// 获取当前目录下有效的程序集
         /// </summary>
         /// <returns></returns>
         static public List<Assembly> GetAssemblyList()
         {
             List<Assembly> assemblyList = new List<Assembly>();
-            ////1、获取运行目录下的所有程序集         本意想拷贝到服务器上一个库文件可以自动加载运行。现在考虑意义不太大。有时间细细调整
-            ////获取根目录            
-            //string runPath = AppContext.BaseDirectory;
-            ////获取可能是程序集的文件列表
-            //string[] fileArray = System.IO.Directory.GetFiles(runPath, "*.dll", System.IO.SearchOption.AllDirectories);
-            ////获取程序集名称
-            //IEnumerable<string> fileList = fileArray.Select(e => System.IO.Path.GetFileNameWithoutExtension(e));
 
-            ////获取有效的程序集 (程序集名称和文件名相同)            
-            //foreach (string file in fileList)
-            //{
-            //    AssemblyName an = new AssemblyName(file);
-            //    if (an != null)
-            //    {
-            //        try
-            //        {
-            //            Assembly assembly = Assembly.Load(an);
-            //            if (assembly != null)
-            //                assemblyList.Add(assembly);
-            //        }
-            //        catch
-            //        {
-            //            //程序集无法反射时跳过
-            //        }
-            //    }
-            //}
-
-            //2、获取引用的再NuGet下的程序集
-            foreach (CompilationLibrary library in DependencyContext.Default.CompileLibraries)
+            foreach (var library in AppDomain.CurrentDomain.GetAssemblies())
             {
-                if (!library.Name.Contains("TianCheng"))
-                {
-                    if (library.Serviceable) continue;
-                    if (library.Type == "package") continue;
-                }
-
                 try
                 {
-                    var assembly = Assembly.Load(new AssemblyName(library.Name));
+                    var assembly = Assembly.Load(new AssemblyName(library.FullName));
+                    if (assembly.FullName.StartsWith("Microsoft") || assembly.FullName.StartsWith("System") || assembly.FullName.StartsWith("MongoDB") ||
+                        assembly.FullName.StartsWith("Interop") || assembly.FullName.StartsWith("Internal") || assembly.FullName.StartsWith("Roslyn") ||
+                        assembly.FullName.StartsWith("DnsClient") || assembly.FullName.StartsWith("MS.") || assembly.FullName.StartsWith("<") ||
+                        assembly.FullName.StartsWith("Scrutor") || assembly.FullName.StartsWith("mscorlib") || assembly.FullName.StartsWith("netstandard") ||
+                        assembly.FullName.StartsWith("OfficeOpenXml") || assembly.FullName.StartsWith("Serilog") || assembly.FullName.StartsWith("EPPlus") ||
+                        assembly.FullName.StartsWith("Newtonsoft") || assembly.FullName.StartsWith("AutoMapper") || assembly.FullName.StartsWith("Swashbuckle"))
+                    {
+                        continue;
+                    }
                     if (assembly != null)
                         assemblyList.Add(assembly);
                 }
@@ -73,7 +46,19 @@ namespace TianCheng.Model
         }
 
         /// <summary>
-        /// 根据接口名称获取所有派生类的对象类型  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 反射指定类型
+        /// </summary>
+        /// <param name="assemblyName"></param>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        static public Type GetTypeByName(string assemblyName, string typeName)
+        {
+            var assembly = Assembly.Load(new AssemblyName(assemblyName));
+            return assembly.GetType(typeName, true, true);
+        }
+
+        /// <summary>
+        /// 根据接口名称获取所有派生类的对象类型
         /// </summary>
         /// <param name="interfaceName">接口名</param>
         /// <returns></returns>
@@ -86,7 +71,7 @@ namespace TianCheng.Model
                 {
                     try
                     {
-                        if (type.GetInterfaces().Where(i => i.ToString().Contains(interfaceName)).Count() > 0)
+                        if (type.GetInterfaces().Where(i => i.ToString().Contains(interfaceName)).Count() > 0)  // i.FullName 会有为空的情况
                         {
                             result.Add(type);
                         }
@@ -101,27 +86,17 @@ namespace TianCheng.Model
         }
 
         /// <summary>
-        /// 根据接口类型获取所有派生类的对象类型  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 根据接口类型获取所有派生类的对象类型
         /// </summary>
         /// <typeparam name="I"></typeparam>
         /// <returns></returns>
         static public IEnumerable<Type> GetTypeByInterface<I>()
         {
-            string interfaceName = typeof(I).Name;
-            foreach (var assembly in GetAssemblyList())
-            {
-                foreach (var type in assembly.GetTypes())
-                {
-                    if (type.GetInterfaces().Where(i => i.Name == interfaceName).Count() > 0)
-                    {
-                        yield return type;
-                    }
-                }
-            }
+            return GetTypeByInterfaceName(typeof(I).Name);
         }
 
         /// <summary>
-        /// 根据接口类型获取所有派生类的对象实例  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 根据接口类型获取所有派生类的对象实例
         /// </summary>
         /// <typeparam name="I"></typeparam>
         /// <returns></returns>
@@ -132,9 +107,13 @@ namespace TianCheng.Model
             {
                 foreach (var type in assembly.GetTypes())
                 {
+                    if (!type.IsClass)
+                    {
+                        continue;
+                    }
                     if (type.GetInterfaces().Where(i => i.Name == interfaceName).Count() > 0)
                     {
-                        //Todo : 如果构造函数需要参数，需要增加处理逻辑
+                        // Todo : 如果构造函数需要参数，需要增加处理逻辑
                         object inst = assembly.CreateInstance(type.FullName);
                         yield return (I)inst;
                     }
@@ -143,7 +122,7 @@ namespace TianCheng.Model
         }
 
         /// <summary>
-        /// 根据基类名称获取所有派生类的对象类型  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 根据基类名称获取所有派生类的对象类型
         /// </summary>
         /// <param name="baseName">基类名</param>
         /// <returns></returns>
@@ -154,7 +133,7 @@ namespace TianCheng.Model
                 foreach (var type in assembly.GetTypes())
                 {
                     TypeInfo typeInfo = type.GetTypeInfo();
-                    if (typeInfo != null && typeInfo.BaseType != null && !String.IsNullOrEmpty(typeInfo.BaseType.Name) &&
+                    if (typeInfo != null && typeInfo.BaseType != null && !string.IsNullOrEmpty(typeInfo.BaseType.Name) &&
                         typeInfo.BaseType.Name.Contains(baseName))
                     {
                         yield return type;
@@ -164,11 +143,11 @@ namespace TianCheng.Model
         }
 
         /// <summary>
-        /// 获取在类中拥有指定特性的特性信息列表  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 获取在类中拥有指定特性的特性信息列表
         /// </summary>
         /// <typeparam name="T">指定特性类型</typeparam>
         /// <returns></returns>
-        static public IEnumerable<T> GetClassAttribute<T>() where T : System.Attribute
+        static public IEnumerable<T> GetClassAttribute<T>() where T : Attribute
         {
             foreach (var assembly in GetAssemblyList())
             {
@@ -185,11 +164,11 @@ namespace TianCheng.Model
         }
 
         /// <summary>
-        /// 获取在方法中拥有指定特性的特性信息列表  【在当前运行目录(包含子目录)下的所有程序集中查找】
+        /// 获取在方法中拥有指定特性的特性信息列表
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        static public IEnumerable<T> GetMethodAttribute<T>() where T : System.Attribute
+        static public IEnumerable<T> GetMethodAttribute<T>() where T : Attribute
         {
             foreach (var assembly in GetAssemblyList())
             {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TianCheng.Model
+﻿namespace TianCheng.Model
 {
     /// <summary>
     /// api 异常类型枚举
@@ -43,6 +39,5 @@ namespace TianCheng.Model
         /// 链接数据库失败
         /// </summary>
         ConnectionDB = 4096,
-
     }
 }

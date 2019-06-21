@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TianCheng.Model
 {
@@ -19,7 +17,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         public DateTime? Convert(string source, DateTime? destination, ResolutionContext context)
         {
-            if (String.IsNullOrWhiteSpace(source))
+            if (string.IsNullOrWhiteSpace(source))
             {
                 return null;
             }

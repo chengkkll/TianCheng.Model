@@ -1,11 +1,6 @@
 ﻿using MongoDB.Bson;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
 
 namespace TianCheng.Model
 {
@@ -34,8 +29,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            ObjectId id = ObjectId.Empty;
-            if (ObjectId.TryParse(reader.Value.ToString(), out id))
+            if (ObjectId.TryParse(reader.Value.ToString(), out ObjectId id))
             {
                 return id;
             }
@@ -48,7 +42,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         public override bool CanConvert(Type objectType)
         {
-            return typeof(MongoDB.Bson.ObjectId).IsAssignableFrom(objectType);
+            return typeof(ObjectId).IsAssignableFrom(objectType);
         }
     }
 }

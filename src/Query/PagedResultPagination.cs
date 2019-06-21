@@ -1,8 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace TianCheng.Model
 {
@@ -32,6 +28,5 @@ namespace TianCheng.Model
         /// </summary>
         [JsonProperty("total")]
         public int TotalPage { get; set; }
-        
     }
 }

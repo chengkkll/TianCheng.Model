@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace WebApi
 {
@@ -14,14 +7,13 @@ namespace WebApi
     {
         public static void Main(string[] args)
         {
-            // NLog.Web.NLogBuilder.ConfigureNLog("nlog.config");
             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                
+                .ConfigureAppConfiguration(TianCheng.Model.ServiceLoader.Appsettings)
                 .Build();
     }
 }

@@ -1,5 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
+
 namespace TianCheng.Model
 {
     /// <summary>
@@ -54,5 +55,4 @@ namespace TianCheng.Model
         }
         #endregion
     }
-
 }

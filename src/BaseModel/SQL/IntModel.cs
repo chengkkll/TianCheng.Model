@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TianCheng.Model
+﻿namespace TianCheng.Model
 {
     /// <summary>
     /// Id为int类型的实体基类
@@ -32,7 +28,7 @@ namespace TianCheng.Model
         {
             get
             {
-                return _Check(Id);
+                return Check(Id);
             }
         }
 
@@ -43,7 +39,7 @@ namespace TianCheng.Model
         /// <returns>true正确ID   false不可用ID</returns>
         public bool CheckId(int id)
         {
-            return _Check(id);
+            return Check(id);
         }
 
         /// <summary>
@@ -51,11 +47,10 @@ namespace TianCheng.Model
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool _Check(int id)
+        private bool Check(int id)
         {
             return id != 0;
         }
-
 
         ///// <summary>
         ///// 将字符串转成ID
@@ -82,8 +77,8 @@ namespace TianCheng.Model
             if (!int.TryParse(strId, out int id))
             {
                 return false;
-            }            
-            if (!_Check(id))
+            }
+            if (!Check(id))
             {
                 return false;
             }

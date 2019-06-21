@@ -1,9 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MongoDB.Bson;
 
 namespace TianCheng.Model
 {
@@ -53,7 +49,7 @@ namespace TianCheng.Model
         /// <returns></returns>
         static public bool CheckMongoId(string id)
         {
-            return ObjectId.TryParse(id, out ObjectId _id);
+            return ObjectId.TryParse(id, out _);
         }
     }
 }

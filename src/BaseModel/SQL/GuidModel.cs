@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TianCheng.Model
 {
@@ -32,7 +30,7 @@ namespace TianCheng.Model
         {
             get
             {
-                return !_Check(this.Id);
+                return !Check(this.Id);
             }
         }
 
@@ -43,7 +41,7 @@ namespace TianCheng.Model
         /// <returns>true正确ID   false不可用ID</returns>
         public bool CheckId(string id)
         {
-            return _Check(id);
+            return Check(id);
         }
 
         /// <summary>
@@ -51,11 +49,10 @@ namespace TianCheng.Model
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool _Check(string id)
+        private bool Check(string id)
         {
-            return !String.IsNullOrWhiteSpace(id);
+            return !string.IsNullOrWhiteSpace(id);
         }
-
 
         /// <summary>
         /// 设置对象ID。如果传入的ID无效，返回false
@@ -64,16 +61,12 @@ namespace TianCheng.Model
         /// <returns></returns>
         public bool SetId(string strId)
         {
-            if (!_Check(strId))
+            if (!Check(strId))
             {
                 return false;
             }
             this.Id = strId;
             return true;
         }
-
-
-
-
     }
 }

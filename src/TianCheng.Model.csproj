@@ -3,12 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <FileVersion>2.0.2</FileVersion>
+    <Version>2.0.2</Version>
     <Company>天成科技</Company>
     <Product>天成科技通用类库</Product>
     <Authors>成善斌</Authors>
+    <PackageProjectUrl>https://github.com/chengkkll/TianCheng.Model</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/chengkkll/TianCheng.Model.git</RepositoryUrl>
+    <RepositoryType>github</RepositoryType>
+    <PackageReleaseNotes>设置目标架构为：.NET Standard 2.0</PackageReleaseNotes>
+    <PackageTags>IdModel,BusinessModel,AutoMapper,Newtonsoft,Serilog,ApiException,ServiceLoader</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/chengkkll/resources/master/Logo64.ico</PackageIconUrl>
+    <Description>实体对象基类，及其常用操作。
+常用操作包括：对象转换、序列化、日志、常用异常处理、依赖注入。</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

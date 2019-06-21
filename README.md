@@ -18,9 +18,9 @@
 
 ### 对象转换
 
-使用了AutoMapper作为对象转换的操作。这里为了使用方便。对其做了一些封装。
+使用了[AutoMapper](http://automapper.org/)作为对象转换的操作。这里为了使用方便。对其做了一些封装。
 
-可以通过继承`IAutoProfile`接口，并在派生类的构造方法中调用接口的`Register`方法。当然`Register`方法内需要写你需要转换的对象。
+对于对象间转换的设置，可以通过继承`IAutoProfile`接口，并在派生类的构造方法中调用接口的`Register`方法。当然`Register`方法内需要写你要转换的对象。
 
 例如：
 
@@ -64,7 +64,7 @@ namespace TianCheng.Model
 
 ### Json处理
 
-使用了Newtonsoft作为Json的处理方式。由于自己的习惯所以增加两个常用的扩展方法`ToJson`与`JsonToObject`。
+使用了[Newtonsoft](https://www.newtonsoft.com/json)作为Json的处理方式。由于自己的习惯所以增加两个常用的扩展方法`ToJson`与`JsonToObject`。
 
 例如：
 
@@ -76,9 +76,17 @@ namespace TianCheng.Model
 
 ### 日志处理
 
-使用Serilog作为日志处理的工具。已添加两个日志工具`CommonLog`与`AppLog`。`CommonLog`是按固定的配置写日志；`AppLog`是读取appsettings.json配置来写日志。
+使用[Serilog](https://serilog.net/)作为日志处理的工具。已添加两个日志工具`CommonLog`与`AppLog`。`CommonLog`是按固定的配置写日志；`AppLog`是读取appsettings.json配置来写日志。
 
-`CommonLog`的日志配置如下：控制台输出Information级别以上的信息；Debug窗口输出为全输出；文件输出为Warning级别以上的，文件名格式为`Logs/TianCheng.Common-{Date}.txt`
+#### CommonLog
+
+`CommonLog`的日志配置如下：
+
+1. 控制台输出Information级别以上的信息；
+2. Debug窗口输出为全输出；
+3. 文件输出为Warning级别以上的，文件名格式为`Logs/TianCheng.Common-{Date}.txt`
+
+#### AppLog
 
 如果想`AppLog`在开发模式使用`appsettings.Development.json`配置；成产模式使用`appsettings.Production.json`配置。需要做如下步骤：
 
@@ -101,6 +109,39 @@ namespace TianCheng.Model
 ```
 
 2、在成产模式的机器增加环境变量`ASPNETCORE_ENVIRONMENT`并设置值为`Production`。
+
+#### Serilog的配置信息参考如下
+
+```json
+  "Serilog": {
+    "WriteTo": [
+      {
+        "Name": "RollingFile",
+        "Args": {
+          "pathFormat": "Logs/common-{Date}.txt",
+          "restrictedToMinimumLevel": "Information"
+        }
+      },
+      "Debug",
+      {
+        "Name": "Console",
+        "Args": {
+          "theme": "Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme::Code, Serilog.Sinks.Console",
+          "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} <s:{SourceContext}>{NewLine}{Exception}",
+          "restrictedToMinimumLevel": "Information"
+        }
+      },
+      {
+        "Name": "MongoDB",
+        "Args": {
+          "databaseUrl": "mongodb://localhost:27017/samples",
+          "collectionName": "system_log",
+          "restrictedToMinimumLevel": "Information"
+        }
+      }
+    ]
+  }
+```
 
 ### 常用异常处理
 

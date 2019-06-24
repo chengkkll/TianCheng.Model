@@ -24,10 +24,6 @@ namespace WebApi.Controllers
         [HttpPost("SendEmail")]
         public ResultView SendEmail()
         {
-            QueryInfo query = new QueryInfo();
-            string json = query.ToJson();
-            QueryInfo info = json.JsonToObject<QueryInfo>();
-
             if (_Logger == null)
             {
                 _Logger = new Serilog.LoggerConfiguration()
@@ -43,8 +39,6 @@ namespace WebApi.Controllers
             }
             _Logger.Fatal("测试邮件 {test}", "邮件发送内容");
             return ResultView.Success();
-
-            
         }
     }
 }

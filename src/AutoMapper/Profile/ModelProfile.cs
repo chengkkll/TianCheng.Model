@@ -20,7 +20,6 @@ namespace TianCheng.Model
         /// </summary>
         public void Register()
         {
-            CommonLog.Logger.Error("register");
             //时间与字符串的处理
             CreateMap<string, DateTime>().ConvertUsing(new StringToDateTimeConverter());
             CreateMap<DateTime, string>().ConvertUsing(new DateTimeToStringConverter());

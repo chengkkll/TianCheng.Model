@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\src\TianCheng.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
 </Project>

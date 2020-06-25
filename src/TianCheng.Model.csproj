@@ -17,7 +17,15 @@
     <PackageIconUrl>https://raw.githubusercontent.com/chengkkll/resources/master/Logo64.ico</PackageIconUrl>
     <Description>实体对象基类，及其常用操作。
 常用操作包括：对象转换、序列化、日志、常用异常处理、依赖注入。</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netstandard2.0\TianCheng.Model.xml</DocumentationFile>
